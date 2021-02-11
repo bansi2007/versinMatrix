@@ -13,5 +13,5 @@ urlpatterns = [
 
     # Matches any html file
     re_path(r'^.*\.*', views.pages, name='pages'),
-
+    path('version_matrix', views.version_matrix, name='version_matrix'),
 ]

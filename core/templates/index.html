@@ -19,8 +19,8 @@
                         <!--[ daily sales section ] start-->
                         <div class="col-md-6 col-xl-4">
                             <div class="card daily-sales">
-                                <div class="card-block">
-                                    <h6 class="mb-4">Daily Sales</h6>
+                                <div class="card-block" id="showDailyServices">
+                                    <h6 class="mb-4">Daily Services</h6>
                                     <div class="row d-flex align-items-center">
                                         <div class="col-9">
                                             <h3 class="f-w-300 d-flex align-items-center m-b-0"><i class="feather icon-arrow-up text-c-green f-30 m-r-10"></i>$ 249.95</h3>
@@ -599,4 +599,23 @@
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
-{% block javascripts %}{% endblock javascripts %}
+{% block javascripts %}
+<script>
+    document.getElementById("showDailyServices").onclick = function(){
+        showDailyServices()
+    };
+    function showDailyServices(){
+        var req  = new XMLHttpRequest();
+        req.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+               window.location.href = "daily_services.html" ; 
+               
+        }
+    };
+    req.open("GET",'daily_services.html',true);
+    req.send();
+    }
+</script>
+
+
+{% endblock javascripts %}
