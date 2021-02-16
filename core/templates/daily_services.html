@@ -43,7 +43,7 @@
                             <div class="card-header">
                                 <h5>Daily Services</h5>
                                 <span class="d-block m-t-5">The Daily ALerts we are getting.</span>
-                                <p style="text-align:end">Date :<input type="text" class="date" id="datepicker"></h4>
+                                <p style="text-align:end">Date : <input type="text" class="date" id="datepicker"></h4>
                             </div>
                             <div class="card-block table-border-style">
                                 <div class="table-responsive">
@@ -135,7 +135,7 @@
             altFormat: "dd,MM, yy",
             onSelect: function(date)
                 {
-                    $.get('/version_matrix',{'data':date},function(data,status){
+                    $.get('/version_matrix',{'data':date},function(data,status){ 
                         var table = document.getElementById('service_table');
                         for (var i = 0 ; i < data['data'].length ; i++){
                                 var row = '<tr>'+
@@ -145,7 +145,7 @@
                                     '<td>'+ data['data'][i]['annotation']+'</td>'+
                                     '</tr>'
                                     table.innerHTML += row
-                            }            
+                            }           
                     })
                 }
         });
