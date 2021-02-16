@@ -65,7 +65,6 @@ def version_matrix(request):
     ]
 
     seldate = request.GET['data']
-    print(seldate)
     blacklist = []
     for dates in data:
         if seldate == dates["date"] :
