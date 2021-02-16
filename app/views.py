@@ -10,7 +10,6 @@ from django.http import HttpResponse
 from django import template
 import json
 
-
 @login_required(login_url="/login/")
 def index(request):
     
@@ -43,10 +42,10 @@ def pages(request):
         html_template = loader.get_template( 'page-500.html' )
         return HttpResponse(html_template.render(context, request))
 
-# This the json data that has to be accessed.
-def version_matrix(request):
-    print(request.GET)
-    data =  [  {"date":"10-11-2020","service":"service_abc", "environment":"1.0", "annotation":"OK"},
+  
+
+def version_matrix(request): 
+    data =  [ {"date":"10-11-2020","service":"service_abc", "environment":"1.0", "annotation":"OK"},
     {"date":"10-11-2020","service":"service_vwx", "environment":"1.0", "annotation":"VersionMismatch"},
     {"date":"10-11-2020","service":"service_xyz", "environment":"1.2", "annotation":"VersionMismatch"},
     {"date":"10-12-2020","service":"service_yz", "environment":"1.6", "annotation":"OK"},
@@ -63,5 +62,15 @@ def version_matrix(request):
     {"date":"10-09-2020","service":"service_mno", "environment":"1.8", "annotation":"VersionMismatch"},
     {"date":"10-09-2020","service":"service_pqr", "environment":"1.6", "annotation":"OK"},
     {"date":"10-09-2020","service":"service_stu", "environment":"17", "annotation":"OK"}
- ]
+    ]
+    # seldate = request.GET['data']
+    # blacklist = []
+    # for i in data['date'] :
+    #     if seldate == i :
+    #         i.append(blacklist)
+    
     return HttpResponse(json.dumps({'data':data}), content_type = 'applications/json')
+
+   
+
+

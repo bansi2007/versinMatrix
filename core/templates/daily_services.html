@@ -4,10 +4,8 @@
 
 <!-- Specific CSS goes HERE -->
 {% block stylesheets %}
-
-<!-- CSS for datepicker -->
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/style.css">
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link href="https://unpkg.com/bootstrap-table@1.18.2/dist/bootstrap-table.min.css" rel="stylesheet">
 {% endblock stylesheets %}
 
 
@@ -45,11 +43,12 @@
                             <div class="card-header">
                                 <h5>Daily Services</h5>
                                 <span class="d-block m-t-5">The Daily ALerts we are getting.</span>
-                                <p style="text-align: end;">Date: <input type="text" id="datepicker"></p>
+                                <p style="text-align:end">Date :<input type="text" class="date" id="datepicker"></h4>
                             </div>
                             <div class="card-block table-border-style">
                                 <div class="table-responsive">
-                                    <table class="table" id="table">
+                                    <h4><input id="alternate" style="border-width: 0px;color:black"></h4>
+                                    <table class="table" id="table"> 
                                         <h5 id="date"></h5>
                                         <thead>
                                             <tr>
@@ -60,6 +59,7 @@
                                             </tr>
                                         </thead>
                                         <tbody id="service_table">
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -84,7 +84,7 @@
 
 {% block javascripts %}
 
-<!-- Javascript for redirecting the back button to home  -->
+<!-- This is javascript for redirecting the back button to home  -->
 <script>
     document.getElementById("btn1").onclick = function(){
         redirectHome()
@@ -99,38 +99,66 @@
     req1.open("GET",'index.html',true);
     req1.send();
     }
-
 </script> 
 
-<!-- Javascript to extract data -->
+<!-- This is script for displaying the data on html service table -->
 <!-- <script >
     'use strict';
     $(document).ready(function(){
-        setTimeout(function(){   
+        setTimeout(function(){  
             $.get('/version_matrix',{'data':'10-12-2020'},function(data,status){
                 var table = document.getElementById('service_table');
                 for (var i = 0 ; i < data['data'].length ; i++){
-                    var row = '<tr>'+
-                        '<td>'+ data['data'][i]['date']+'</td>'+
-                        '<td>'+ data['data'][i]['service']+'</td>'+
-                        '<td>'+ data['data'][i]['environment'] +'</td>'+
-                        '<td>'+ data['data'][i]['annotation']+'</td>'+
-                        '</tr>'
-                        table.innerHTML += row
-                    }
-        }, 100);
-    }); 
-});
+                        var row = '<tr>'+
+                            '<td>'+ data['data'][i]['date']+'</td>'+
+                            '<td>'+ data['data'][i]['service']+'</td>'+
+                            '<td>'+ data['data'][i]['environment'] +'</td>'+
+                            '<td>'+ data['data'][i]['annotation']+'</td>'+
+                            '</tr>'
+                            table.innerHTML += row
+                    }            
+            })
+        },100); 
+    });
 </script>  -->
 
-<!-- Javascript for date picker -->
+<!-- This is a javascript for date picker -->
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
-  $( function() {
-    $( "#datepicker" ).datepicker();
-  } );
-</script>
+    $( function() {
+        $( "#datepicker" ).datepicker({
+            dateFormat:'dd-mm-yy',
+            altField: "#alternate",
+            changeMonth: true,
+            changeYear: true,
+            altFormat: "dd,MM, yy",
+            onSelect: function(date)
+                {
+                    $.get('/version_matrix',{'data':date},function(data,status){
+                        var table = document.getElementById('service_table');
+                        for (var i = 0 ; i < data['data'].length ; i++){
+                                var row = '<tr>'+
+                                    '<td>'+ data['data'][i]['date']+'</td>'+
+                                    '<td>'+ data['data'][i]['service']+'</td>'+
+                                    '<td>'+ data['data'][i]['environment'] +'</td>'+
+                                    '<td>'+ data['data'][i]['annotation']+'</td>'+
+                                    '</tr>'
+                                    table.innerHTML += row
+                            }            
+                    })
+                }
+        });
+      } );
+    
+</script> 
 
-
+<!-- This is the javascript for the table  -->
+<!-- <script src="https://unpkg.com/bootstrap-table@1.18.2/dist/bootstrap-table.min.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.18.2/dist/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
+ <script>
+    $(function() {
+        $('#table').bootstrapTable()
+      })
+</script>   -->
 {% endblock javascripts %}
