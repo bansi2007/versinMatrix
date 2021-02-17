@@ -101,64 +101,40 @@
     }
 </script> 
 
-<!-- This is script for displaying the data on html service table -->
-<!-- <script >
-    'use strict';
-    $(document).ready(function(){
-        setTimeout(function(){  
-            $.get('/version_matrix',{'data':'10-12-2020'},function(data,status){
-                var table = document.getElementById('service_table');
-                for (var i = 0 ; i < data['data'].length ; i++){
-                        var row = '<tr>'+
-                            '<td>'+ data['data'][i]['date']+'</td>'+
-                            '<td>'+ data['data'][i]['service']+'</td>'+
-                            '<td>'+ data['data'][i]['environment'] +'</td>'+
-                            '<td>'+ data['data'][i]['annotation']+'</td>'+
-                            '</tr>'
-                            table.innerHTML += row
-                    }            
-            })
-        },100); 
-    });
-</script>  -->
-
 <!-- This is a javascript for date picker -->
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
 <script>
-    $( function() {
-        $( "#datepicker" ).datepicker({
-            dateFormat:'dd-mm-yy',
-            altField: "#alternate",
-            changeMonth: true,
-            changeYear: true,
-            altFormat: "dd,MM, yy",
-            onSelect: function(date)
-                {
-                    $.get('/version_matrix',{'data':date},function(data,status){ 
-                        var table = document.getElementById('service_table');
-                        for (var i = 0 ; i < data['data'].length ; i++){
-                                var row = '<tr>'+
-                                    '<td>'+ data['data'][i]['date']+'</td>'+
-                                    '<td>'+ data['data'][i]['service']+'</td>'+
-                                    '<td>'+ data['data'][i]['environment'] +'</td>'+
-                                    '<td>'+ data['data'][i]['annotation']+'</td>'+
-                                    '</tr>'
-                                    table.innerHTML += row
-                            }           
-                    })
-                }
-        });
-      } );
-    
+'use strict';
+$(document).ready(function(){
+    setTimeout(function(){  
+        $( function() {
+            $( "#datepicker" ).datepicker({
+                dateFormat:'dd-mm-yy',
+                altField: "#alternate",
+                changeMonth: true,
+                changeYear: true,
+                altFormat: "dd,MM, yy",
+                onSelect: function(date)
+                    {
+                        $.get('/version_matrix',{'data':date},function(data,status){ 
+                            var table = document.getElementById('service_table');
+                            for (var i = 0 ; i < data['data'].length ; i++){
+                                    var row = '<tr>'+
+                                        '<td>'+ data['data'][i]['date']+'</td>'+
+                                        '<td>'+ data['data'][i]['service']+'</td>'+
+                                        '<td>'+ data['data'][i]['environment'] +'</td>'+
+                                        '<td>'+ data['data'][i]['annotation']+'</td>'+
+                                        '</tr>'
+                                        table.innerHTML += row
+                                }           
+                        })
+                    }
+            });
+        });   
+    },100); 
+});    
 </script> 
 
-<!-- This is the javascript for the table  -->
-<!-- <script src="https://unpkg.com/bootstrap-table@1.18.2/dist/bootstrap-table.min.js"></script>
-<script src="https://unpkg.com/bootstrap-table@1.18.2/dist/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
- <script>
-    $(function() {
-        $('#table').bootstrapTable()
-      })
-</script>   -->
+
 {% endblock javascripts %}

@@ -45,6 +45,8 @@ def pages(request):
   
 
 def version_matrix(request): 
+
+# here we have made a static data .
     data =  [ {"date":"10-11-2020","service":"service_abc", "environment":"1.0", "annotation":"OK"},
     {"date":"11-10-2021","service":"service_vwx", "environment":"1.0", "annotation":"VersionMismatch"},
     {"date":"11-10-2021","service":"service_xyz", "environment":"1.2", "annotation":"VersionMismatch"},
@@ -64,6 +66,7 @@ def version_matrix(request):
     {"date":"09-09-2021","service":"service_stu", "environment":"17", "annotation":"OK"}
     ]
 
+
     seldate = request.GET['data']
     blacklist = []
     for dates in data:
@@ -73,4 +76,9 @@ def version_matrix(request):
 
    
 
+# here we have called the data which we had given in get function in daily html .
+# and then created a empty list that will stored the data of particular date . 
+# then we will iterate a variable in data that will give match the date with selected date .
+# and if it matches it will go on appending .
+# then we will dump the blacklist data into data . 
 
