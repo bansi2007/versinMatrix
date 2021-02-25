@@ -102,7 +102,6 @@
 </script> 
 
 <!-- This is a javascript for date picker -->
-<!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
 <script>
 'use strict';
@@ -118,6 +117,10 @@ $(document).ready(function(){
                 onSelect: function(date)
                     {
                         $.get('/version_matrix',{'data':date},function(data,status){ 
+                            $("#service_table").remove(); 
+                            if ($("#table tbody").length == 0) {
+                                $("#table").append('<tbody id="service_table"></tbody>');
+                            }
                             var table = document.getElementById('service_table');
                             for (var i = 0 ; i < data['data'].length ; i++){
                                     var row = '<tr>'+
